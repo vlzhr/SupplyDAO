@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supply Tips</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@waves.exchange/provider-web@0.2.3/dist/provider-web.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@waves/signer@0.1.2/dist/signer.min.js"></script>
+    <script src="suku-handler.js"></script>
+    <script src="waves-handler.js"></script>
+</head>
+<body>
+    <section>
+        <h1>tip service for those who deserve it
+        </h1>
+
+        <img class="lead" src="https://im-media.voltron.voanews.com/Drupal/01live-166/styles/sourced/s3/2019-04/D0005D1C-96D2-4A33-8366-E053A8327073.jpg?itok=xSo6TGSY" alt="">
+        <p class="call">Support the people who start the supply chain and grow coffee for your table, but never get a tip.</p>
+
+        <form class="form-1" action="javascript:getItemById('5f83c950c3516000198d0246')">
+            <input class="item_id" type="text" name="item_id" placeholder="Item Code">
+            <button>Find</button>
+
+            <div class="test" onclick="document.querySelector('.item_id').value = '5f83c950c3516000198d0246';">test</div>
+        </form>
+
+
+        <div class="selected">
+            <p>We hope you enjoyed <strong class="sel-name"></strong> created for you at <strong class="sel-date"></strong></p>
+        </div>
+
+
+        <div class="form-2">
+            <p class="call">send tips using USDN crypto!</p>
+            <button onclick="donate(1)">1 USD</button>
+            <button onclick="donate(2)">2 USD</button>
+            <button onclick="donate(5)">5 USD</button>
+        </div>
+
+
+        <div class="gallery">
+            <p class="call">Where to find Item Code?</p>
+            <img src="https://i.redd.it/g1ytnkjdvtv41.jpg" alt="">
+            <img src="https://ae01.alicdn.com/kf/HTB1q.cpHVXXXXapXVXXq6xXFXXX1/Custom-clothing-labels-printed-brand-label-with-QR-code-or-two-dimensional-barcodes-satin-tape-material.jpg_q50.jpg" alt="">
+        </div>
+
+
+    </section>
+</body>
+</html>

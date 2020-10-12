@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    background: darkslategray;
+    color: white;
+    font-family: Tahoma, sans-serif;
+    padding-bottom: 50px;
+}
+
+section {
+    width: 90%;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+p.call {
+    margin-top: 5px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+img.lead {
+    max-width: 100%;
+}
+
+form {
+    margin: 30px 0 60px;
+}
+
+.test {
+    font-style: oblique;
+}
+
+input, button {
+    box-sizing: border-box;
+    padding: 10px 15px;
+    font-size: 18px;
+}
+
+input.item_id {
+    width: 65%;
+}
+
+button {
+    width: 32%;
+}
+
+button.donate {
+    padding: 10px 10px;
+    font-size: 14px;
+}
+
+.gallery {
+    margin-bottom: 50px;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+}
+
+.gallery img {
+    display: block;
+    height: 200px;
+    float: left;
+    margin: 0 20px 0 0;
+}
+
+.selected {
+    display: none;
+    background: whitesmoke;
+    color: black;
+    padding: 15px;
+    margin: 15px 0 25px;
+}
+
+.form-2 {
+    display: none;
+}

@@ -1,0 +1,60 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE DAPP #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+
+
+let USDN = base58'4bkoaxapG6mutKXCwEFKJP1xfh4EbNMBzX4vKAjnJphi'
+
+
+func tryGetInteger(key: String) = {
+    let val = match getInteger(this, key) {
+        case b:Int => b
+        case _ => 0
+    }
+    val
+}
+
+
+@Callable(i)
+func voteOnSplit(g1: Int, g2: Int, g3: Int) = {
+  if ((g1+g2+g3) > 10) then {
+    throw("Please disperse max 10 points")
+  } else if (tryGetInteger(i.caller.toString()+"_voted") != 0) then {
+    throw("You have already voted")
+  } else {
+    let newG1 = tryGetInteger("group1_share") + g1
+    let newG2 = tryGetInteger("group2_share") + g2
+    let newG3 = tryGetInteger("group3_share") + g3
+    WriteSet([
+      DataEntry("group1_share", newG1),
+      DataEntry("group2_share", newG2),
+      DataEntry("group3_share", newG3),
+      DataEntry(i.caller.toString()+"_voted", g1+g2+g3)
+    ])
+  }
+}
+
+
+@Callable(i)
+func sendTips(itemId: String, g1: String, g2: String, g3: String) = {
+  let pmt = i.payment.extract()
+  if (pmt.assetId != USDN) then {
+    throw("Tips accepted only in USDN")
+  } else {
+    let g1Share = tryGetInteger("group1_share")
+    let g2Share = tryGetInteger("group2_share")
+    let g3Share = tryGetInteger("group3_share")
+    ScriptResult(
+      WriteSet([DataEntry("tips_amount_"+itemId, pmt.amount)]),
+      TransferSet([
+        ScriptTransfer(addressFromStringValue(g1), pmt.amount * g1Share / (g1Share+g2Share+g3Share), USDN),
+        ScriptTransfer(addressFromStringValue(g2), pmt.amount * g2Share / (g1Share+g2Share+g3Share), USDN),
+        ScriptTransfer(addressFromStringValue(g3), pmt.amount * g3Share / (g1Share+g2Share+g3Share), USDN)
+      ])
+    )
+  }
+}
+
+
+# @Verifier(tx)
+# func standardVerifier() = sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
